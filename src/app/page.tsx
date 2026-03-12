@@ -6,7 +6,7 @@ import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#1a0a04] via-[#111111] to-[#0d0d0d]">
+    <main className="min-h-screen" style={{ background: 'linear-gradient(to bottom, #1a0803, #2a1005, #1a0803, #0d0905)' }}>
       <Navbar />
       <ScrollyCanvas />
       <About />

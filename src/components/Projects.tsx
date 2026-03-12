@@ -40,7 +40,7 @@ const PROJECTS = [
 
 export default function Projects() {
   return (
-    <section id="products" className="w-full relative py-32 px-6 md:px-24 bg-gradient-to-b from-[#3d1607] via-[#1a0a04] to-[#121212] overflow-hidden -mt-[20vh] pt-[30vh]">
+    <section id="products" className="w-full relative py-32 px-6 md:px-24 overflow-hidden -mt-[20vh] pt-[30vh]" style={{ background: 'linear-gradient(to bottom, #2d1208, #1e0b04, #0f0904)' }}>
       {/* Cinematic styling matching the sequence */}
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/20 via-black/10 to-black/40 z-0" />
       

@@ -5,10 +5,10 @@ import AnimatedCounter from "./AnimatedCounter";
 
 export default function About() {
   return (
-    <section id="about" className="w-full relative py-24 md:py-40 px-6 md:px-24 bg-gradient-to-b from-[#1a0a04] via-[#130c06] to-[#2a0e05] flex items-center justify-center overflow-hidden">
-      {/* Warm radial atmosphere */}
+    <section id="about" className="w-full relative py-24 md:py-40 px-6 md:px-24 flex items-center justify-center overflow-hidden" style={{ background: 'linear-gradient(to bottom, #1e0b04, #2d1208, #1a0803)' }}>
+      {/* Warm amber radial atmosphere matching sequence glow */}
       <div className="absolute inset-0 pointer-events-none z-0" style={{
-        background: 'radial-gradient(ellipse at 50% 0%, rgba(180, 60, 10, 0.15) 0%, transparent 70%)'
+        background: 'radial-gradient(ellipse at 50% -10%, rgba(220, 90, 10, 0.25) 0%, rgba(140, 40, 5, 0.1) 40%, transparent 70%)'
       }} />
 
       <div className="max-w-7xl mx-auto relative z-10 w-full flex flex-col gap-12 lg:gap-16">
