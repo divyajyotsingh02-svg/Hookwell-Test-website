@@ -167,7 +167,7 @@ export default function ScrollyCanvas() {
         <canvas ref={canvasRef} className="w-full h-full block" />
         
         {/* Dark vignette & stronger black gradient for high readability over images */}
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/30 via-black/15 to-black/10" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/15 via-black/5 to-transparent" />
         <div className="absolute inset-0 pointer-events-none" style={{
           background: 'radial-gradient(circle, rgba(0,0,0,0.3) 30%, rgba(18,18,18,0.95) 120%)'
         }} />
