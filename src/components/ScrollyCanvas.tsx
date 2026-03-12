@@ -12,8 +12,9 @@ const getFramePath = (index: number) =>
 export default function ScrollyCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [images, setImages] = useState<HTMLImageElement[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const [firstFrameReady, setFirstFrameReady] = useState(false);
+  const [allLoaded, setAllLoaded] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -22,89 +23,98 @@ export default function ScrollyCanvas() {
 
   const currentIndex = useTransform(scrollYProgress, [0, 1], [0, FRAME_COUNT - 1]);
 
-  useEffect(() => {
-    let loadedCount = 0;
-    const loadedImages: HTMLImageElement[] = [];
-
-    for (let i = 0; i < FRAME_COUNT; i++) {
-      const img = new Image();
-      img.src = getFramePath(i);
-      img.onload = () => {
-        loadedCount++;
-        if (loadedCount === FRAME_COUNT) {
-          setIsLoaded(true);
-        }
-      };
-      // fallback in case of load error so we don't stall forever
-      img.onerror = () => {
-        loadedCount++;
-        if (loadedCount === FRAME_COUNT) {
-          setIsLoaded(true);
-        }
-      }
-      loadedImages.push(img);
-    }
-    setImages(loadedImages);
-  }, []);
-
-  useEffect(() => {
-    if (!isLoaded || images.length === 0) return;
-
+  // Draw helper — uses whatever images are available
+  const drawFrame = (index: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Use dpr for crisp canvas
+    const safeIndex = Math.min(Math.floor(index), imagesRef.current.length - 1);
+    const currentImage = imagesRef.current[safeIndex];
+    if (!currentImage?.complete || !currentImage.naturalWidth) return;
+
     const dpr = window.devicePixelRatio || 1;
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = `${window.innerWidth}px`;
+    canvas.style.height = `${window.innerHeight}px`;
+    ctx.scale(dpr, dpr);
 
-    const render = (index: number) => {
-      const currentImage = images[Math.floor(index)];
-      if (!currentImage) return;
+    const hRatio = window.innerWidth / currentImage.width;
+    const vRatio = window.innerHeight / currentImage.height;
+    const isMobile = window.innerWidth < 768;
+    const ratio = isMobile
+      ? Math.max(hRatio, vRatio) * 0.75
+      : Math.max(hRatio, vRatio) * 1.15;
 
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
-      
-      ctx.scale(dpr, dpr);
+    const centerShift_x = (window.innerWidth - currentImage.width * ratio) / 2;
+    const centerShift_y = (window.innerHeight - currentImage.height * ratio) / 2;
 
-      const hRatio = window.innerWidth / currentImage.width;
-      const vRatio = window.innerHeight / currentImage.height;
-      
-      // Sweet spot: on mobile use 75% of cover ratio (neither full cover crop nor contain letterbox).
-      // On desktop, cover + 15% to hide the watermark.
-      const isMobile = window.innerWidth < 768;
-      const ratio = isMobile
-        ? Math.max(hRatio, vRatio) * 0.75
-        : Math.max(hRatio, vRatio) * 1.15;
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    ctx.drawImage(
+      currentImage,
+      0, 0,
+      currentImage.width, currentImage.height,
+      centerShift_x, centerShift_y,
+      currentImage.width * ratio, currentImage.height * ratio
+    );
+  };
 
-      const centerShift_x = (window.innerWidth - currentImage.width * ratio) / 2;
-      const centerShift_y = (window.innerHeight - currentImage.height * ratio) / 2;
-
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-      ctx.drawImage(
-        currentImage,
-        0,
-        0,
-        currentImage.width,
-        currentImage.height,
-        centerShift_x,
-        centerShift_y,
-        currentImage.width * ratio,
-        currentImage.height * ratio
-      );
+  // Phase 1: Load the first frame immediately, show canvas ASAP
+  useEffect(() => {
+    const firstImg = new Image();
+    firstImg.src = getFramePath(0);
+    firstImg.onload = () => {
+      imagesRef.current[0] = firstImg;
+      setFirstFrameReady(true);
     };
+    firstImg.onerror = () => {
+      // Still try to continue even if first frame fails
+      setFirstFrameReady(true);
+    };
+  }, []);
 
-    render(Number(currentIndex.get()));
+  // Phase 2: Load remaining frames in the background after first frame shows
+  useEffect(() => {
+    if (!firstFrameReady) return;
+
+    let loadedCount = 1; // first frame already done
+    // Pre-fill so index access is safe
+    if (!imagesRef.current[0]) loadedCount = 0;
+
+    for (let i = 1; i < FRAME_COUNT; i++) {
+      const img = new Image();
+      img.src = getFramePath(i);
+      const capturedIndex = i;
+      img.onload = () => {
+        imagesRef.current[capturedIndex] = img;
+        loadedCount++;
+        if (loadedCount === FRAME_COUNT) {
+          setAllLoaded(true);
+        }
+      };
+      img.onerror = () => {
+        loadedCount++;
+        if (loadedCount === FRAME_COUNT) {
+          setAllLoaded(true);
+        }
+      };
+    }
+  }, [firstFrameReady]);
+
+  // Draw on scroll — works from first frame onwards
+  useEffect(() => {
+    if (!firstFrameReady) return;
+
+    drawFrame(Number(currentIndex.get()));
 
     const unsubscribe = currentIndex.on("change", (latest) => {
-      render(latest);
+      drawFrame(latest);
     });
 
     const handleResize = () => {
-      render(Number(currentIndex.get()));
+      drawFrame(Number(currentIndex.get()));
     };
     window.addEventListener("resize", handleResize);
 
@@ -112,7 +122,8 @@ export default function ScrollyCanvas() {
       unsubscribe();
       window.removeEventListener("resize", handleResize);
     };
-  }, [isLoaded, images, currentIndex]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [firstFrameReady, currentIndex]);
 
   return (
     <div ref={containerRef} className="relative h-[500vh] bg-[#121212] w-full">
@@ -125,17 +136,32 @@ export default function ScrollyCanvas() {
           maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)'
         }}
       >
-        {!isLoaded && (
+        {/* Show loading screen only until first frame is ready */}
+        {!firstFrameReady && (
           <div className="absolute inset-0 flex items-center justify-center bg-[#121212] z-50">
             <motion.div 
               animate={{ opacity: [0.5, 1, 0.5] }} 
               transition={{ duration: 1.5, repeat: Infinity }}
               className="text-white text-sm font-medium tracking-widest uppercase"
             >
-              Loading Sequence...
+              Loading...
             </motion.div>
           </div>
         )}
+
+        {/* Subtle "loading remaining frames" indicator — shown until all are loaded */}
+        {firstFrameReady && !allLoaded && (
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
+            <div className="w-24 h-[2px] bg-white/10 rounded-full overflow-hidden">
+              <motion.div 
+                className="h-full bg-white/40 rounded-full"
+                animate={{ x: ["-100%", "200%"] }}
+                transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
+          </div>
+        )}
+
         <canvas ref={canvasRef} className="w-full h-full block" />
         
         {/* Dark vignette & stronger black gradient for high readability over images */}
