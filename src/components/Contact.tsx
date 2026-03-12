@@ -4,13 +4,10 @@ import { motion } from "framer-motion";
 
 export default function Contact() {
   return (
-    <section id="contact" className="w-full relative py-32 px-6 md:px-24 bg-[#121212] overflow-hidden">
-      {/* Cinematic gradient matching the dark theme */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#121212] via-[#0a0a0a] to-black z-0" />
-
-      {/* Subtle radial glow */}
-      <div className="absolute inset-0 pointer-events-none opacity-40 z-0" style={{
-        background: 'radial-gradient(circle at 70% 50%, rgba(180, 20, 20, 0.08) 0%, transparent 60%)'
+    <section id="contact" className="w-full relative py-32 px-6 md:px-24 bg-gradient-to-b from-[#1a0a04] via-[#110d09] to-[#0d0d0d] overflow-hidden">
+      {/* Warm radial glow */}
+      <div className="absolute inset-0 pointer-events-none opacity-60 z-0" style={{
+        background: 'radial-gradient(circle at 70% 50%, rgba(180, 60, 10, 0.12) 0%, transparent 60%)'
       }} />
 
       <div className="max-w-7xl mx-auto relative z-10">

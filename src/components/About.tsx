@@ -5,11 +5,10 @@ import AnimatedCounter from "./AnimatedCounter";
 
 export default function About() {
   return (
-    <section id="about" className="w-full relative py-24 md:py-40 px-6 md:px-24 bg-[#121212] flex items-center justify-center overflow-hidden">
-      {/* Background aesthetics - Fade to rust gradient at bottom to merge with Our Products */}
-      <div className="absolute inset-0 pointer-events-none z-0 bg-gradient-to-b from-transparent to-[#2a0e05]/50" />
-      <div className="absolute inset-0 pointer-events-none opacity-20 z-0" style={{
-        background: 'radial-gradient(ellipse at center top, rgba(160, 20, 20, 0.1) 0%, rgba(18,18,18,1) 80%)'
+    <section id="about" className="w-full relative py-24 md:py-40 px-6 md:px-24 bg-gradient-to-b from-[#1a0a04] via-[#130c06] to-[#2a0e05] flex items-center justify-center overflow-hidden">
+      {/* Warm radial atmosphere */}
+      <div className="absolute inset-0 pointer-events-none z-0" style={{
+        background: 'radial-gradient(ellipse at 50% 0%, rgba(180, 60, 10, 0.15) 0%, transparent 70%)'
       }} />
 
       <div className="max-w-7xl mx-auto relative z-10 w-full flex flex-col gap-12 lg:gap-16">

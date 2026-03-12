@@ -84,7 +84,7 @@ export default function Projects() {
                 />
 
                 {/* Gradient dark color blend — always on mobile, hover-only on desktop */}
-                <div className={`absolute inset-0 bg-gradient-to-t from-[#121212]/90 via-[#121212]/50 to-transparent z-0
+                <div className={`absolute inset-0 bg-gradient-to-t from-[#1a0a04]/90 via-[#1a0a04]/50 to-transparent z-0
                   opacity-100
                   md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500`} />
                 
