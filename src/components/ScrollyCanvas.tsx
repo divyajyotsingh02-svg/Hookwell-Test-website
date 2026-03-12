@@ -126,7 +126,7 @@ export default function ScrollyCanvas() {
   }, [firstFrameReady, currentIndex]);
 
   return (
-    <div ref={containerRef} className="relative w-full" style={{ height: '500svh', background: '#121212' }}>
+    <div ref={containerRef} className="relative w-full bg-[#121212]" style={{ height: '500svh' }}>
       <Overlay progress={scrollYProgress} />
       
       <div 

@@ -40,7 +40,7 @@ const PROJECTS = [
 
 export default function Projects() {
   return (
-    <section id="products" className="w-full relative py-32 px-6 md:px-24 bg-gradient-to-b from-[#1a0a04] via-[#121212] to-[#121212] overflow-hidden -mt-[20vh] pt-[30vh]">
+    <section id="products" className="w-full relative py-32 px-6 md:px-24 bg-[#121212] overflow-hidden -mt-[20vh] pt-[30vh]">
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div 
