@@ -6,7 +6,7 @@ import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
-    <main className="min-h-screen" style={{ background: 'linear-gradient(to bottom, #1a0803, #2a1005, #1a0803, #0d0905)' }}>
+    <main className="min-h-screen bg-[#121212]">
       <Navbar />
       <ScrollyCanvas />
       <About />
@@ -14,8 +14,8 @@ export default function Home() {
       <Contact />
       
       {/* Footer */}
-      <footer className="w-full relative py-12 px-6 md:px-24 bg-gradient-to-b from-[#0d0d0d] to-[#080808] overflow-hidden font-mono tracking-widest uppercase">
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#1a0a04]/30 to-transparent z-0" />
+      <footer className="w-full relative py-12 px-6 md:px-24 bg-black overflow-hidden font-mono tracking-widest uppercase">
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/80 to-black/40 z-0" />
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs font-light text-gray-500 relative z-10">
           <p>© {new Date().getFullYear()} HOOKWELL ENGINEERS. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">

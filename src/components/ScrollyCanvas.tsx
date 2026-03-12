@@ -126,21 +126,19 @@ export default function ScrollyCanvas() {
   }, [firstFrameReady, currentIndex]);
 
   return (
-    <div ref={containerRef} className="relative w-full" style={{ height: '500svh', background: '#1e0b04' }}>
+    <div ref={containerRef} className="relative w-full" style={{ height: '500svh', background: '#121212' }}>
       <Overlay progress={scrollYProgress} />
       
       <div 
         className="sticky top-0 left-0 w-full overflow-hidden"
         style={{
           height: '100svh',
-          WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
-          maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
           touchAction: 'pan-y',
         }}
       >
         {/* Show loading screen only until first frame is ready */}
         {!firstFrameReady && (
-          <div className="absolute inset-0 flex items-center justify-center z-50" style={{ background: '#1e0b04' }}>
+          <div className="absolute inset-0 flex items-center justify-center z-50 bg-[#121212]">
             <motion.div 
               animate={{ opacity: [0.5, 1, 0.5] }} 
               transition={{ duration: 1.5, repeat: Infinity }}
@@ -166,8 +164,10 @@ export default function ScrollyCanvas() {
 
         <canvas ref={canvasRef} className="w-full h-full block" />
         
-        {/* Minimal top-edge fade only for navbar readability */}
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/10 to-transparent" />
+        {/* Top fade for navbar readability */}
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/20 to-transparent" style={{ height: '30%' }} />
+        {/* Bottom fade — blends into the dark section below */}
+        <div className="absolute bottom-0 left-0 w-full pointer-events-none" style={{ height: '35%', background: 'linear-gradient(to bottom, transparent, #121212)' }} />
       </div>
     </div>
   );
