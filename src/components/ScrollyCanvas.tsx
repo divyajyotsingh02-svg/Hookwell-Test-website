@@ -73,9 +73,9 @@ export default function ScrollyCanvas() {
       const hRatio = window.innerWidth / currentImage.width;
       const vRatio = window.innerHeight / currentImage.height;
       
-      // Calculate cover ratio, then multiply by 1.15 to mathematically "zoom in" 
-      // by 15%, which pushes the edges (and the bottom-right watermark) out of the canvas bounds.
-      const ratio = Math.max(hRatio, vRatio) * 1.15;
+      // On mobile, don't over-zoom (zoom-to-fill only). On desktop, add 15% zoom to hide watermark.
+      const isMobile = window.innerWidth < 768;
+      const ratio = Math.max(hRatio, vRatio) * (isMobile ? 1.0 : 1.15);
 
       const centerShift_x = (window.innerWidth - currentImage.width * ratio) / 2;
       const centerShift_y = (window.innerHeight - currentImage.height * ratio) / 2;
