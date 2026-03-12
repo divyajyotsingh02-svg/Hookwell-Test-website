@@ -133,8 +133,8 @@ export default function ScrollyCanvas() {
         className="sticky top-0 left-0 w-full overflow-hidden"
         style={{
           height: '100svh',
-          WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
-          maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+          maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
           touchAction: 'pan-y',
         }}
       >
