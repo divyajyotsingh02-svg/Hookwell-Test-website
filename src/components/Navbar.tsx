@@ -25,7 +25,7 @@ export default function Navbar() {
   return (
     <>
       <motion.nav 
-        className={`fixed top-0 left-0 w-full z-[200] transition-all duration-500 border-b ${isScrolled ? 'py-3 border-black/10' : 'py-5 md:py-8 border-transparent'}`}
+        className={`fixed top-0 left-0 w-full z-[200] transition-all duration-500 border-b ${isScrolled ? 'py-3 border-black/10' : 'py-6 md:py-10 border-transparent'}`}
         style={{
           backgroundColor: `rgba(255, 255, 255, ${bgOpacity})`,
           backdropFilter: `blur(${blur}px)`
@@ -34,7 +34,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 md:px-24 flex justify-between items-center">
           {/* Logo / Brand Name */}
           <a href="#" className="flex items-center group">
-            <div className={`relative w-[160px] h-[42px] md:w-[260px] md:h-[60px] flex items-center justify-start transition-transform group-hover:scale-105 ${!isScrolled ? 'brightness-0 invert opacity-90' : 'opacity-90'}`}>
+            <div className={`relative w-[160px] h-[42px] md:w-[320px] md:h-[78px] flex items-center justify-start transition-transform group-hover:scale-105 ${!isScrolled ? 'brightness-0 invert opacity-90' : 'opacity-90'}`}>
               <Image 
                 src="/hookwell-logo-bw.png" 
                 alt="Hookwell Engineers Logo" 
@@ -46,19 +46,19 @@ export default function Navbar() {
           </a>
 
           {/* Desktop Navigation Links (Top Right) */}
-          <div className="hidden md:flex items-center gap-6 lg:gap-8 justify-end w-full max-w-2xl">
-            <a href="#about" className={`text-[10px] font-semibold tracking-[0.2em] uppercase transition-colors ${isScrolled ? 'text-black/60 hover:text-black' : 'text-white/60 hover:text-white'}`}>
+          <div className="hidden md:flex items-center gap-8 lg:gap-10 justify-end w-full max-w-2xl">
+            <a href="#about" className={`text-sm font-semibold tracking-[0.2em] uppercase transition-colors ${isScrolled ? 'text-black/60 hover:text-black' : 'text-white/60 hover:text-white'}`}>
               About
             </a>
-            <a href="#products" className={`text-[10px] font-semibold tracking-[0.2em] uppercase transition-colors ${isScrolled ? 'text-black/60 hover:text-black' : 'text-white/60 hover:text-white'}`}>
+            <a href="#products" className={`text-sm font-semibold tracking-[0.2em] uppercase transition-colors ${isScrolled ? 'text-black/60 hover:text-black' : 'text-white/60 hover:text-white'}`}>
               Products
             </a>
-            <a href="#contact" className={`text-[10px] font-semibold tracking-[0.2em] uppercase transition-colors ${isScrolled ? 'text-black/60 hover:text-black' : 'text-white/60 hover:text-white'}`}>
+            <a href="#contact" className={`text-sm font-semibold tracking-[0.2em] uppercase transition-colors ${isScrolled ? 'text-black/60 hover:text-black' : 'text-white/60 hover:text-white'}`}>
               Contact
             </a>
-            <a href="https://www.indiamart.com/hookwell-engineers/" target="_blank" rel="noopener noreferrer" className={`text-[10px] font-semibold tracking-[0.2em] uppercase transition-colors flex items-center gap-1 ${isScrolled ? 'text-black/60 hover:text-black' : 'text-white/60 hover:text-white'}`}>
+            <a href="https://www.indiamart.com/hookwell-engineers/" target="_blank" rel="noopener noreferrer" className={`text-sm font-semibold tracking-[0.2em] uppercase transition-colors flex items-center gap-1.5 ${isScrolled ? 'text-black/60 hover:text-black' : 'text-white/60 hover:text-white'}`}>
               IndiaMART
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" className="opacity-50">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="opacity-50">
                 <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </a>
@@ -66,7 +66,7 @@ export default function Navbar() {
             {/* Primary CTA Button */}
             <a 
               href="#contact" 
-              className="ml-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-red-600 to-orange-500 text-white text-[9px] font-bold tracking-[0.2em] uppercase hover:shadow-[0_0_15px_rgba(220,38,38,0.4)] hover:scale-105 transition-all duration-300 whitespace-nowrap"
+              className="ml-4 px-7 py-3 rounded-full bg-gradient-to-r from-red-600 to-orange-500 text-white text-xs font-bold tracking-[0.2em] uppercase hover:shadow-[0_0_15px_rgba(220,38,38,0.4)] hover:scale-105 transition-all duration-300 whitespace-nowrap"
             >
               Get a Quote
             </a>
