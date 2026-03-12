@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 
 export default function Contact() {
   return (
-    <section id="contact" className="w-full relative py-32 px-6 md:px-24 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #1a0803, #130805, #0d0905)' }}>
+    <section id="contact" className="w-full relative py-32 px-6 md:px-24 overflow-hidden" style={{ background: 'linear-gradient(to bottom, #2a0e04, #1e0b04, #160904)' }}>
       {/* Warm amber radial glow */}
       <div className="absolute inset-0 pointer-events-none opacity-70 z-0" style={{
-        background: 'radial-gradient(circle at 70% 50%, rgba(200, 70, 10, 0.15) 0%, transparent 60%)'
+        background: 'radial-gradient(circle at 70% 50%, rgba(220, 80, 10, 0.18) 0%, transparent 60%)'
       }} />
 
       <div className="max-w-7xl mx-auto relative z-10">

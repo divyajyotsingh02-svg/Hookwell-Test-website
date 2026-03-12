@@ -40,13 +40,7 @@ const PROJECTS = [
 
 export default function Projects() {
   return (
-    <section id="products" className="w-full relative py-32 px-6 md:px-24 overflow-hidden -mt-[20vh] pt-[30vh]" style={{ background: 'linear-gradient(to bottom, #2d1208, #1e0b04, #0f0904)' }}>
-      {/* Cinematic styling matching the sequence */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/20 via-black/10 to-black/40 z-0" />
-      
-      <div className="absolute inset-0 pointer-events-none opacity-80 z-0" style={{
-        background: 'radial-gradient(circle at center, rgba(160, 20, 20, 0.05) 20%, rgba(18,18,18,0.8) 100%)'
-      }} />
+    <section id="products" className="w-full relative py-32 px-6 md:px-24 overflow-hidden -mt-[20vh] pt-[30vh]" style={{ background: 'linear-gradient(to bottom, #3a1508, #2a0e04, #1e0b04)' }}>
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div 

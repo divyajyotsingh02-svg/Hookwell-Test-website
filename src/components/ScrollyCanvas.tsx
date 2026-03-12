@@ -126,7 +126,7 @@ export default function ScrollyCanvas() {
   }, [firstFrameReady, currentIndex]);
 
   return (
-    <div ref={containerRef} className="relative bg-[#121212] w-full" style={{ height: '500svh' }}>
+    <div ref={containerRef} className="relative w-full" style={{ height: '500svh', background: '#1e0b04' }}>
       <Overlay progress={scrollYProgress} />
       
       <div 
@@ -140,7 +140,7 @@ export default function ScrollyCanvas() {
       >
         {/* Show loading screen only until first frame is ready */}
         {!firstFrameReady && (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#121212] z-50">
+          <div className="absolute inset-0 flex items-center justify-center z-50" style={{ background: '#1e0b04' }}>
             <motion.div 
               animate={{ opacity: [0.5, 1, 0.5] }} 
               transition={{ duration: 1.5, repeat: Infinity }}
