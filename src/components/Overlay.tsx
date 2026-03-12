@@ -25,9 +25,10 @@ export default function Overlay({ progress }: { progress: MotionValue<number> })
           className="absolute inset-0 flex flex-col items-center justify-center text-center drop-shadow-2xl px-4"
         >
           <h1
-            className="font-black tracking-tight text-white uppercase mt-12 relative drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl sm:tracking-[0.08em]"
+            className="font-black tracking-tight text-white uppercase mt-12 relative drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] sm:tracking-[0.08em]"
+            style={{ fontSize: 'clamp(2rem, 6vw, 9rem)' }}
           >
-            HOOKWELL ENGINEERS<span className="text-[0.4em] sm:text-lg md:text-2xl font-light tracking-normal text-white/50">™</span>
+            HOOKWELL ENGINEERS<span style={{ fontSize: '0.35em' }} className="font-light tracking-normal text-white/50">™</span>
           </h1>
           <p className="text-[10px] sm:text-lg md:text-xl lg:text-2xl font-medium mt-4 md:mt-6 tracking-widest text-white uppercase drop-shadow-md max-w-4xl px-4 text-balance">
             PRECISION INDUSTRIAL LIFTING SOLUTIONS
