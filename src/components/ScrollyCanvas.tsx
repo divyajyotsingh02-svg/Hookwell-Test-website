@@ -126,14 +126,16 @@ export default function ScrollyCanvas() {
   }, [firstFrameReady, currentIndex]);
 
   return (
-    <div ref={containerRef} className="relative h-[500vh] bg-[#121212] w-full">
+    <div ref={containerRef} className="relative bg-[#121212] w-full" style={{ height: '500svh' }}>
       <Overlay progress={scrollYProgress} />
       
       <div 
-        className="sticky top-0 left-0 w-full h-screen overflow-hidden"
+        className="sticky top-0 left-0 w-full overflow-hidden"
         style={{
+          height: '100svh',
           WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
-          maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)'
+          maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
+          touchAction: 'pan-y',
         }}
       >
         {/* Show loading screen only until first frame is ready */}

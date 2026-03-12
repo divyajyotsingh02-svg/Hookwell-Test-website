@@ -9,6 +9,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Use small viewport height so sticky works correctly when mobile URL bar hides/shows */
+  height: 100%;
 }
 
 body {
@@ -16,7 +18,12 @@ body {
   color: var(--foreground);
   margin: 0;
   padding: 0;
-  overflow-x: clip;
+  /* overflow-x: clip breaks position:sticky on iOS Safari — use hidden instead */
+  overflow-x: hidden;
+  /* Ensure smooth momentum scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+  /* Allow vertical touch scrolling */
+  touch-action: pan-y;
 }
 
 /* Custom modern scrollbar */
