@@ -73,36 +73,53 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="group relative flex flex-col justify-end h-[400px] md:h-[500px] bg-white/5 border border-white/10 rounded-2xl p-8 overflow-hidden hover:border-white/30 hover:shadow-[0_0_40px_rgba(220,38,38,0.15)] transition-all duration-500 cursor-pointer w-full"
+                className="group relative flex flex-col justify-end h-[400px] md:h-[500px] bg-white/5 border border-white/10 rounded-2xl p-8 overflow-hidden md:hover:border-white/30 md:hover:shadow-[0_0_40px_rgba(220,38,38,0.15)] transition-all duration-500 cursor-pointer w-full"
               >
-                {/* Product Machine Render Hover Image background */}
+                {/* Product Machine Render — always visible (low opacity) on mobile, hover-reveal on desktop */}
                 <div 
-                  className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-0 group-hover:opacity-70 transition-opacity duration-700 z-0 scale-105 group-hover:scale-100 transition-transform mix-blend-lighten"
+                  className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 z-0 mix-blend-lighten
+                    opacity-30 scale-100
+                    md:opacity-0 md:scale-105 md:group-hover:opacity-70 md:group-hover:scale-100"
                   style={{ backgroundImage: `url(${project.image})` }}
                 />
 
-                {/* Gradient dark color blend over the image */}
-                <div className={`absolute inset-0 bg-gradient-to-t from-[#121212]/90 via-[#121212]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0`} />
+                {/* Gradient dark color blend — always on mobile, hover-only on desktop */}
+                <div className={`absolute inset-0 bg-gradient-to-t from-[#121212]/90 via-[#121212]/50 to-transparent z-0
+                  opacity-100
+                  md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500`} />
                 
                 {/* Colored brand tinted layer overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0 mix-blend-overlay`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${project.color} z-0 mix-blend-overlay
+                  opacity-60
+                  md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500`} />
 
-                <div className="relative z-10 mt-auto transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <div className="relative z-10 mt-auto">
                   <p className="text-sm font-medium tracking-widest uppercase text-gray-400 mb-2">
                     {project.category}
                   </p>
                   <h4 className="text-2xl md:text-4xl font-semibold mb-4">
                     {project.title}
                   </h4>
-                  <p className="text-gray-300 font-light max-w-md opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                  <p className="text-gray-300 font-light max-w-md
+                    opacity-100
+                    md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500">
                     {project.description}
                   </p>
                 </div>
 
-                {/* View Project Button */}
-                <div className="absolute top-8 right-8 z-20 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100">
+                {/* View Project Button — desktop only hover */}
+                <div className="absolute top-8 right-8 z-20 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 hidden md:flex">
                   <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white/5 backdrop-blur-sm group-hover:bg-white text-white group-hover:text-[#121212] transition-colors duration-300">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Mobile tap arrow — always visible on mobile */}
+                <div className="absolute top-6 right-6 z-20 md:hidden">
+                  <div className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center bg-white/10 text-white">
+                    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
