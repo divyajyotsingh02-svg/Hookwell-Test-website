@@ -73,9 +73,10 @@ export default function ScrollyCanvas() {
       const hRatio = window.innerWidth / currentImage.width;
       const vRatio = window.innerHeight / currentImage.height;
       
-      // On mobile, don't over-zoom (zoom-to-fill only). On desktop, add 15% zoom to hide watermark.
+      // On mobile portrait screens the landscape images would be over-zoomed if we use Math.max (cover).
+      // Instead fit to width on mobile, and use cover + 15% zoom on desktop to hide the watermark.
       const isMobile = window.innerWidth < 768;
-      const ratio = Math.max(hRatio, vRatio) * (isMobile ? 1.0 : 1.15);
+      const ratio = isMobile ? hRatio : Math.max(hRatio, vRatio) * 1.15;
 
       const centerShift_x = (window.innerWidth - currentImage.width * ratio) / 2;
       const centerShift_y = (window.innerHeight - currentImage.height * ratio) / 2;
