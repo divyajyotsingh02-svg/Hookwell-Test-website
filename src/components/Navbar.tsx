@@ -25,7 +25,7 @@ export default function Navbar() {
   return (
     <>
       <motion.nav 
-        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 border-b ${isScrolled ? 'py-3 border-black/10' : 'py-5 md:py-8 border-transparent'}`}
+        className={`fixed top-0 left-0 w-full z-[200] transition-all duration-500 border-b ${isScrolled ? 'py-3 border-black/10' : 'py-5 md:py-8 border-transparent'}`}
         style={{
           backgroundColor: `rgba(255, 255, 255, ${bgOpacity})`,
           backdropFilter: `blur(${blur}px)`
@@ -73,7 +73,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Right Side: Quote button + Hamburger */}
-          <div className="md:hidden flex items-center gap-3">
+          <div className="md:hidden flex items-center gap-3 relative z-[201] pointer-events-auto">
             <a 
               href="#contact"
               className="px-3 py-1.5 rounded-full bg-gradient-to-r from-red-600 to-orange-500 text-white text-[8px] font-bold tracking-[0.15em] uppercase whitespace-nowrap"
@@ -107,7 +107,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-0 left-0 w-full h-screen bg-black/95 z-[99] flex flex-col items-center justify-center gap-10 md:hidden"
+            className="fixed top-0 left-0 w-full h-screen bg-black/95 z-[199] flex flex-col items-center justify-center gap-10 md:hidden"
           >
             {/* Close button */}
             <button 
